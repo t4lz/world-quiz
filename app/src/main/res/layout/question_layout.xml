@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     >
 
     <TextView
         android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Question 1"
-        android:textSize="42sp"
+        android:text="Question 1/9"
+        android:textSize="24sp"
+        android:gravity="right"
+        android:paddingBottom="16dp"
         />
 
     <TextView
@@ -19,7 +22,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="some question-specific text"
+        android:text="How much wood, would a woodchuck chuck?"
+        android:paddingBottom="16dp"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:id="@+id/answer_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type your answer here!"
         />
 
     <Button
@@ -27,5 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
+        android:enabled="false"
         />
 </LinearLayout>
