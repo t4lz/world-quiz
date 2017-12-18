@@ -1,3 +1,17 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">World Quiz</string>
+    <string name="question_title">Question <xliff:g id="question_number" example="1">%d</xliff:g>/
+    <xliff:g id="total_number_of_questions" example="9">%d</xliff:g></string>
+
+
+
+    <string-array name="questions">
+        <item>What country has the highest population?</item>
+        <item>This is a question with a text answer?</item>
+    </string-array>
+
+    <string-array name="answers">
+        <item>China</item>
+        <item>Yes</item>
+    </string-array>
 </resources>

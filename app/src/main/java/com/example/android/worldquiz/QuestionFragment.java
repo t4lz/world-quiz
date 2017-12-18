@@ -79,6 +79,10 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 int currentFragmentNumber = ((MainActivity)getActivity()).getViewPager();
+                int totalNumberOfFragments = ((MainActivity)getActivity()).getPagesNumber();
+                if (currentFragmentNumber == totalNumberOfFragments - 1) {
+                    ((MainActivity)getActivity()).addNextPage();
+                }
                 ((MainActivity)getActivity()).setViewPager(currentFragmentNumber + 1);
                 Log.v(TAG, "Button clicked!");
             }
@@ -86,11 +90,6 @@ public class QuestionFragment extends Fragment {
 
 
         return view;
-    }
-
-    public void nextFragment(View view){
-        int currentFragmentNumber = ((MainActivity)getActivity()).getViewPager();
-        ((MainActivity)getActivity()).setViewPager(currentFragmentNumber + 1);
     }
 
     /**
