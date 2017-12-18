@@ -22,23 +22,23 @@ import org.w3c.dom.Text;
 public class QuestionFragment extends Fragment {
     private static final String TAG = "QuestionFragment";
 
-    private static final String TITLE = "page_title";
     private static final String CONTENT = "page_message";
+    private static final String PAGENUM = "page_number";
 
-    String title;
     String content;
+    int pageNumber;
 
     Button nextButton;
     TextView questionTitle;
     TextView questionContent;
     EditText userAnswer;
 
-    public static QuestionFragment newInstance(String question_title_text, String question_content_text)
+    public static QuestionFragment newInstance(String question_content_text, int pageNum)
     {
         QuestionFragment f = new QuestionFragment();
         Bundle bdl = new Bundle(2);
-        bdl.putString(TITLE, question_title_text);
         bdl.putString(CONTENT, question_content_text);
+        bdl.putInt(PAGENUM, pageNum);
         f.setArguments(bdl);
         return f;
     }
@@ -48,14 +48,14 @@ public class QuestionFragment extends Fragment {
     @Override
     public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         Bundle arguments = getArguments();
-        title = arguments.getString(TITLE);
         content = arguments.getString(CONTENT);
+        pageNumber = arguments.getInt(PAGENUM);
 
         View view = inflater.inflate(R.layout.question_layout, container, false);
         questionTitle= (TextView) view.findViewById(R.id.question_title);
         questionContent = (TextView) view.findViewById(R.id.question_content);
-        questionTitle.setText(title);
         questionContent.setText(content);
+        questionTitle.setText(String.format(getString(R.string.question_title),  pageNumber));
         
         userAnswer = (EditText) view.findViewById(R.id.answer_edit_text);
         userAnswer.addTextChangedListener(new TextWatcher() {

@@ -1,10 +1,13 @@
 package com.example.android.worldquiz;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -12,10 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
+    Queue<Fragment> questionFragments = new ArrayDeque<>();
     String[] questions;
     String[] answers;
     SectionsStatePagerAdapter adapter;
-    Queue<QuestionFragment> questionsQueue = new LinkedList<QuestionFragment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager (ViewPager viewPager){
         adapter.addFragment(new WelcomeFragment());
-        adapter.addFragment(QuestionFragment.newInstance("First Question", questions[0]));
-        questionsQueue.add(QuestionFragment.newInstance("Second Question", questions[1]));
+        adapter.addFragment(QuestionFragment.newInstance(questions[0], 1));
+        questionFragments.add(QuestionFragment.newInstance(questions[1], 2));
         viewPager.setAdapter(adapter);
     }
 
     public void addNextPage() {
-        adapter.addFragment(questionsQueue.remove());
+        adapter.addFragment(questionFragments.remove());
     }
 
 
