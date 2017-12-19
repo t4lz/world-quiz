@@ -29,9 +29,11 @@ public class QuestionFragment extends Fragment {
 
     private static final String CONTENT = "page_message";
     private static final String PAGENUM = "page_number";
+    private static final String ANSWERSID = "possible_answers_id";
 
     String content;
     int pageNumber;
+    int answerArrayResourceId;
 
     Button nextButton;
     TextView questionTitle;
@@ -39,12 +41,13 @@ public class QuestionFragment extends Fragment {
     EditText userAnswer;
     RelativeLayout answerArea;
 
-    public static QuestionFragment newInstance(String question_content_text, int pageNum)
+    public static QuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
     {
         QuestionFragment f = new QuestionFragment();
-        Bundle bdl = new Bundle(2);
+        Bundle bdl = new Bundle(3);
         bdl.putString(CONTENT, question_content_text);
         bdl.putInt(PAGENUM, pageNum);
+        bdl.putInt(ANSWERSID, possibleAnswersId);
         f.setArguments(bdl);
         return f;
     }
@@ -56,6 +59,7 @@ public class QuestionFragment extends Fragment {
         Bundle arguments = getArguments();
         content = arguments.getString(CONTENT);
         pageNumber = arguments.getInt(PAGENUM);
+        answerArrayResourceId = arguments.getInt(ANSWERSID);
 
         View view = inflater.inflate(R.layout.question_layout, container, false);
         questionTitle= (TextView) view.findViewById(R.id.question_title);
