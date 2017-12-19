@@ -88,7 +88,7 @@ public class QuestionFragment extends Fragment {
     }
 
 
-    private void populateAnswerArea() {
+    public void populateAnswerArea() {
         userAnswer = new EditText(((MainActivity)getActivity()));
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -111,17 +111,21 @@ public class QuestionFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                enableButtonIfText();
+                setRightButtonState(shouldEnableButton());
             }
         });
         answerArea.addView(userAnswer);
 
     }
 
+    public boolean shouldEnableButton(){
+        return (userAnswer.getText().toString().length() > 0);
+    }
+
     /**
      * Enable the button if an answer was given, else disable it.
      */
-    public void enableButtonIfText(){
-        nextButton.setEnabled(userAnswer.getText().toString().length()>0);
+    public void setRightButtonState(boolean shouldEnable){
+        nextButton.setEnabled(shouldEnable);
     }
 }

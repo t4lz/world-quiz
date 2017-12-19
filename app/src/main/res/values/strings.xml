@@ -8,10 +8,19 @@
     <string-array name="questions">
         <item>What country has the highest population?</item>
         <item>This is a question with a text answer?</item>
+        <item>Question with multiple answers?</item>
     </string-array>
 
     <string-array name="answers">
         <item>China</item>
         <item>Yes</item>
+    </string-array>
+
+    <string-array name="options1">
+        <item>First Option</item>
+        <item>Second Option</item>
+        <item>Third Option</item>
+        <item>Fourth Option</item>
+        <item>Fifth Option</item>
     </string-array>
 </resources>
