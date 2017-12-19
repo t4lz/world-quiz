@@ -1,6 +1,7 @@
 package com.example.android.worldquiz;
 
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -14,7 +15,22 @@ import android.widget.RelativeLayout;
 public class MultipleAnswerQuestionFragment extends QuestionFragment {
     private static final String TAG = "MultipleAnswerQuestionFragment";
 
+    private static final String CONTENT = "page_message";
+    private static final String PAGENUM = "page_number";
+    private static final String ANSWERSID = "possible_answers_id";
+
     CheckBox[] answerCheckBoxes;
+
+    public static MultipleAnswerQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
+    {
+        MultipleAnswerQuestionFragment f = new MultipleAnswerQuestionFragment();
+        Bundle bdl = new Bundle(3);
+        bdl.putString(CONTENT, question_content_text);
+        bdl.putInt(PAGENUM, pageNum);
+        bdl.putInt(ANSWERSID, possibleAnswersId);
+        f.setArguments(bdl);
+        return f;
+    }
 
     @Override
     public void populateAnswerArea() {
