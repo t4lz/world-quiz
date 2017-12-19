@@ -1,16 +1,21 @@
 package com.example.android.worldquiz;
 
+import android.app.ActionBar;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -32,6 +37,7 @@ public class QuestionFragment extends Fragment {
     TextView questionTitle;
     TextView questionContent;
     EditText userAnswer;
+    RelativeLayout answerArea;
 
     public static QuestionFragment newInstance(String question_content_text, int pageNum)
     {
@@ -56,8 +62,18 @@ public class QuestionFragment extends Fragment {
         questionContent = (TextView) view.findViewById(R.id.question_content);
         questionContent.setText(content);
         questionTitle.setText(String.format(getString(R.string.question_title),  pageNumber));
-        
-        userAnswer = (EditText) view.findViewById(R.id.answer_edit_text);
+
+        answerArea = (RelativeLayout) view.findViewById(R.id.answer_area);
+        userAnswer = new EditText(((MainActivity)getActivity()));
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        userAnswer.setLayoutParams(layoutParams);
+        userAnswer.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        userAnswer.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        userAnswer.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        userAnswer.setHint(R.string.answer_hint);
         userAnswer.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -73,6 +89,7 @@ public class QuestionFragment extends Fragment {
                 enableButtonIfText();
             }
         });
+        answerArea.addView(userAnswer);
 
         nextButton = (Button) view.findViewById(R.id.next);
         nextButton.setOnClickListener(new View.OnClickListener() {
