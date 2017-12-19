@@ -41,6 +41,8 @@
             android:hint="Type your answer here!"
             android:layout_centerVertical="true"
             android:fontFamily="serif"
+            android:imeOptions="actionDone"
+            android:inputType="textCapWords"
             />
 
     </RelativeLayout>
