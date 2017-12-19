@@ -64,6 +64,27 @@ public class QuestionFragment extends Fragment {
         questionTitle.setText(String.format(getString(R.string.question_title),  pageNumber));
 
         answerArea = (RelativeLayout) view.findViewById(R.id.answer_area);
+        populateAnswerArea();
+        nextButton = (Button) view.findViewById(R.id.next);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int currentFragmentNumber = ((MainActivity)getActivity()).getViewPager();
+                int totalNumberOfFragments = ((MainActivity)getActivity()).getPagesNumber();
+                if (currentFragmentNumber == totalNumberOfFragments - 1) {
+                    ((MainActivity)getActivity()).addNextPage();
+                }
+                ((MainActivity)getActivity()).setViewPager(currentFragmentNumber + 1);
+                Log.v(TAG, "Button clicked!");
+            }
+        });
+
+
+        return view;
+    }
+
+
+    private void populateAnswerArea() {
         userAnswer = new EditText(((MainActivity)getActivity()));
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -91,22 +112,6 @@ public class QuestionFragment extends Fragment {
         });
         answerArea.addView(userAnswer);
 
-        nextButton = (Button) view.findViewById(R.id.next);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int currentFragmentNumber = ((MainActivity)getActivity()).getViewPager();
-                int totalNumberOfFragments = ((MainActivity)getActivity()).getPagesNumber();
-                if (currentFragmentNumber == totalNumberOfFragments - 1) {
-                    ((MainActivity)getActivity()).addNextPage();
-                }
-                ((MainActivity)getActivity()).setViewPager(currentFragmentNumber + 1);
-                Log.v(TAG, "Button clicked!");
-            }
-        });
-
-
-        return view;
     }
 
     /**
