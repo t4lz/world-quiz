@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(QuestionFragment.newInstance(questions[0], 1, 0));
         questionFragments.add(QuestionFragment.newInstance(questions[1], 2, 0));
         questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[2], 3, R.array.options1));
+        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[3], 4, R.array.options2));
         viewPager.setAdapter(adapter);
     }
 

@@ -9,6 +9,7 @@
         <item>What country has the highest population?</item>
         <item>This is a question with a text answer?</item>
         <item>Question with multiple answers?</item>
+        <item>Why are these called radio buttons anyway?</item>
     </string-array>
 
     <string-array name="answers">
@@ -23,4 +24,13 @@
         <item>Fourth Option</item>
         <item>Fifth Option</item>
     </string-array>
+
+    <string-array name="options2">
+        <item>First Option</item>
+        <item>Second Option</item>
+        <item>Because it is like an old radio where only one button can be pushed simultaneously.</item>
+        <item>Fourth Option</item>
+    </string-array>
+
+
 </resources>
