@@ -30,6 +30,7 @@ public class QuestionFragment extends Fragment {
     private static final String CONTENT = "page_message";
     private static final String PAGENUM = "page_number";
     private static final String ANSWERSID = "possible_answers_id";
+    public static final String USER_ANSWER = "userAnswer";
 
     String content;
     int pageNumber;
@@ -85,6 +86,27 @@ public class QuestionFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            if (userAnswer != null) {
+                userAnswer.setText(savedInstanceState.getString(USER_ANSWER));
+            }
+        }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's state here
+        if (userAnswer != null) {
+            outState.putString(USER_ANSWER, userAnswer.getText().toString());
+        }
     }
 
 

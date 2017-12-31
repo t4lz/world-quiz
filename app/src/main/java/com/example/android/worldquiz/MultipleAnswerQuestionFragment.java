@@ -18,8 +18,10 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
     private static final String CONTENT = "page_message";
     private static final String PAGENUM = "page_number";
     private static final String ANSWERSID = "possible_answers_id";
+    public static final String CHECKED_STATE = "checkedState";
 
     CheckBox[] answerCheckBoxes;
+    boolean[] checkedState;
 
     public static MultipleAnswerQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
     {
@@ -30,6 +32,30 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
         bdl.putInt(ANSWERSID, possibleAnswersId);
         f.setArguments(bdl);
         return f;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            checkedState = savedInstanceState.getBooleanArray(CHECKED_STATE);
+            for (int i=0; i < answerCheckBoxes.length; i++) {
+                answerCheckBoxes[i].setChecked(checkedState[i]);
+            }
+        }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's state here
+        checkedState = new boolean[answerCheckBoxes.length];
+        for (int i=0; i < answerCheckBoxes.length; i++) {
+            checkedState[i] = answerCheckBoxes[i].isChecked();
+        }
+        outState.putBooleanArray(CHECKED_STATE, checkedState);
     }
 
     @Override

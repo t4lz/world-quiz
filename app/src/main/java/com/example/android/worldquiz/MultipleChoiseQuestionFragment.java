@@ -19,8 +19,10 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
     private static final String CONTENT = "page_message";
     private static final String PAGENUM = "page_number";
     private static final String ANSWERSID = "possible_answers_id";
+    public static final String CHECKED_BUTTON = "checkedButton";
 
     RadioButton[] answerRadioButtons;
+    int checkedButton;
 
     public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
     {
@@ -31,6 +33,32 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
         bdl.putInt(ANSWERSID, possibleAnswersId);
         f.setArguments(bdl);
         return f;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            checkedButton = savedInstanceState.getInt(CHECKED_BUTTON);
+            if (checkedButton != -1){
+                answerRadioButtons[checkedButton].setChecked(true);
+            }
+        }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //Save the fragment's state here
+        checkedButton = -1;
+        for (int i=0; i < answerRadioButtons.length; i++) {
+            if (answerRadioButtons[i].isChecked()) {
+                checkedButton = i;
+            }
+        }
+        outState.putInt(CHECKED_BUTTON, checkedButton);
     }
 
     @Override
