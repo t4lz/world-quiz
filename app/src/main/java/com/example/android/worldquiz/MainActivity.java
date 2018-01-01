@@ -1,16 +1,11 @@
 package com.example.android.worldquiz;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
