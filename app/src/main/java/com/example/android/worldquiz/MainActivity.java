@@ -15,7 +15,6 @@ import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String FRAGMENT_KEY_TEMPLATE = "fragmentNumber%d";
     public static final String NUM_OF_FRAGMENTS = "numOfFragments";
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
@@ -23,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     String[] questions;
     String[] answers;
     SectionsStatePagerAdapter adapter;
-    FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager (ViewPager viewPager){
         adapter.addFragment(new WelcomeFragment());
         questionFragments.add(QuestionFragment.newInstance(questions[0], 1, 0));
-        questionFragments.add(QuestionFragment.newInstance(questions[1], 2, 0));
-        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[2], 3, R.array.options1));
-        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[3], 4, R.array.options2));
+        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[1], 2, R.array.options1));
+        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[2], 3, R.array.options2));
+        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[3], 4, R.array.options3));
+        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[4], 5, R.array.options4));
+        questionFragments.add(QuestionFragment.newInstance(questions[5], 6, 0));
         questionFragments.add(new EndingFragment());
         viewPager.setAdapter(adapter);
     }

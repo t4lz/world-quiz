@@ -7,29 +7,47 @@
 
     <string-array name="questions">
         <item>What country has the highest population?</item>
-        <item>This is a question with a text answer?</item>
-        <item>Question with multiple answers?</item>
-        <item>Why are these called radio buttons anyway?</item>
+        <item>Which of the following languages are official languages in Switzerland?</item>
+        <item>What is the capital city of Australia?</item>
+        <item>How many oceans are there on earth?</item>
+        <item>With which of the following countries does spain have a boarder?</item>
+        <item>What is the largest country in Africa?</item>
     </string-array>
 
     <string-array name="answers">
         <item>China</item>
-        <item>Yes</item>
     </string-array>
 
     <string-array name="options1">
-        <item>First Option</item>
-        <item>Second Option</item>
-        <item>Third Option</item>
-        <item>Fourth Option</item>
-        <item>Fifth Option</item>
+        <item>French</item>
+        <item>English</item>
+        <item>Italian</item>
+        <item>Yiddish</item>
+        <item>German</item>
+        <item>Romansh</item>
     </string-array>
 
     <string-array name="options2">
-        <item>First Option</item>
-        <item>Second Option</item>
-        <item>Because it is like an old radio where only one button can be pushed simultaneously.</item>
-        <item>Fourth Option</item>
+        <item>Vienna</item>
+        <item>Melbourne</item>
+        <item>Canberra</item>
+        <item>Sydney</item>
+    </string-array>
+
+
+    <string-array name="options3">
+        <item>27</item>
+        <item>5</item>
+        <item>2</item>
+        <item>6</item>
+    </string-array>
+
+    <string-array name="options4">
+        <item>France</item>
+        <item>Italy</item>
+        <item>Andorra</item>
+        <item>Portugal</item>
+        <item>Mexico</item>
     </string-array>
 
 
