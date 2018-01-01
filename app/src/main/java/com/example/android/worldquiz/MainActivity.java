@@ -16,6 +16,7 @@ import java.util.Queue;
 public class MainActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_KEY_TEMPLATE = "fragmentNumber%d";
+    public static final String NUM_OF_FRAGMENTS = "numOfFragments";
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
     Queue<Fragment> questionFragments = new ArrayDeque<>();
@@ -35,12 +36,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         setupViewPager(mViewPager);
         if (savedInstanceState != null){
-            manager = getSupportFragmentManager();
-            List<Fragment> fragments = manager.getFragments();
-            int numOfFragments = fragments.size();
-            for (int i=0; i<numOfFragments; i++){
-                adapter.addFragment(fragments.get(i));
-                questionFragments.remove();
+            int numOfFragments = savedInstanceState.getInt(NUM_OF_FRAGMENTS);
+            for (int i=1; i<numOfFragments; i++){
+                addNextPage();
             }
         }
     }
@@ -49,11 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //Save the fragment's instance
-        int numOfFragments = adapter.getCount();
-        manager = getSupportFragmentManager();
-        for (int i=1; i<numOfFragments; i++){
-            manager.putFragment(outState, String.format(FRAGMENT_KEY_TEMPLATE, i) , adapter.getItem(i));
-        }
+        outState.putInt(NUM_OF_FRAGMENTS, adapter.getCount());
     }
 
     private void setupViewPager (ViewPager viewPager){
