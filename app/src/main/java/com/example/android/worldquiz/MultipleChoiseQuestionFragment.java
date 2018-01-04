@@ -2,6 +2,8 @@ package com.example.android.worldquiz;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -63,13 +65,8 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
 
     @Override
     public void populateAnswerArea() {
-        RadioGroup answerListRadioGroup = new RadioGroup(((MainActivity)getActivity()));
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        answerListRadioGroup.setLayoutParams(layoutParams);
-        answerListRadioGroup.setOrientation(LinearLayout.VERTICAL);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        RadioGroup answerListRadioGroup = (RadioGroup) inflater.inflate(R.layout.multiple_choice_layout, null, false);
         String[] answers = getResources().getStringArray(answerArrayResourceId);
 
         answerRadioButtons = new RadioButton[answers.length];
@@ -77,6 +74,10 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
             answerRadioButtons[i] = new RadioButton(((MainActivity)getActivity()));
             answerRadioButtons[i].setText(answers[i]);
             answerRadioButtons[i].setTypeface(Typeface.create("serif", Typeface.NORMAL));
+            answerRadioButtons[i].setPadding(getResources().getDimensionPixelSize(R.dimen.space_between_button_and_answer),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_vertical),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_horizontal),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_vertical));
             answerListRadioGroup.addView(answerRadioButtons[i]);
         }
         answerArea.addView(answerListRadioGroup);
