@@ -2,10 +2,12 @@ package com.example.android.worldquiz;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 /**
@@ -60,19 +62,18 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
 
     @Override
     public void populateAnswerArea() {
-        LinearLayout answersListLinearLayout = new LinearLayout(((MainActivity)getActivity()));
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        answersListLinearLayout.setLayoutParams(layoutParams);
-        answersListLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        LinearLayout answersListLinearLayout = (LinearLayout) inflater.inflate(R.layout.multiple_answer_layout, null, false);
         String[] answers = getResources().getStringArray(answerArrayResourceId);
         answerCheckBoxes = new CheckBox[answers.length];
         for (int i=0; i < answers.length; i++) {
             answerCheckBoxes[i] = new CheckBox(((MainActivity)getActivity()));
             answerCheckBoxes[i].setText(answers[i]);
             answerCheckBoxes[i].setTypeface(Typeface.create("serif", Typeface.NORMAL));
+            answerCheckBoxes[i].setPadding(getResources().getDimensionPixelSize(R.dimen.space_between_button_and_answer),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_vertical),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_horizontal),
+                    getResources().getDimensionPixelSize(R.dimen.space_between_answers_vertical));
             answerCheckBoxes[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
             {
                 @Override
