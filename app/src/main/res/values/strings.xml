@@ -14,9 +14,8 @@
         <item>What is the largest country in Africa?</item>
     </string-array>
 
-    <string-array name="answers">
-        <item>China</item>
-    </string-array>
+    <string name="answer0">China</string>
+    <string name="answer5">Algeria</string>
 
     <string-array name="options1">
         <item>French</item>
