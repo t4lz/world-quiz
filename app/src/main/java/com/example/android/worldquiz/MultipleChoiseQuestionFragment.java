@@ -25,6 +25,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
 
     RadioButton[] answerRadioButtons;
     int checkedButton;
+    RadioGroup answerListRadioGroup;
 
     public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
     {
@@ -44,7 +45,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
             //Restore the fragment's state here
             checkedButton = savedInstanceState.getInt(CHECKED_BUTTON);
             if (checkedButton != -1){
-                answerRadioButtons[checkedButton].setChecked(true);
+                answerListRadioGroup.check(checkedButton);
             }
         }
     }
@@ -60,18 +61,20 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
                 checkedButton = i;
             }
         }
+        checkedButton = answerListRadioGroup.getCheckedRadioButtonId();
         outState.putInt(CHECKED_BUTTON, checkedButton);
     }
 
     @Override
     public void populateAnswerArea() {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        RadioGroup answerListRadioGroup = (RadioGroup) inflater.inflate(R.layout.multiple_choice_layout, null, false);
+        answerListRadioGroup = (RadioGroup) inflater.inflate(R.layout.multiple_choice_layout, null, false);
         String[] answers = getResources().getStringArray(answerArrayResourceId);
 
         answerRadioButtons = new RadioButton[answers.length];
         for (int i=0; i < answers.length; i++) {
             answerRadioButtons[i] = new RadioButton(((MainActivity)getActivity()));
+            answerRadioButtons[i].setId(i);
             answerRadioButtons[i].setText(answers[i]);
             answerRadioButtons[i].setTypeface(Typeface.create("serif", Typeface.NORMAL));
             answerRadioButtons[i].setPadding(getResources().getDimensionPixelSize(R.dimen.space_between_button_and_answer),
