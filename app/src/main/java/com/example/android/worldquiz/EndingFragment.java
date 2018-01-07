@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class EndingFragment extends Fragment {
     private static final String TAG = "WelcomeFragment";
+    public static final String BUTTON_STATE = "ButtonState";
     Button nextButton;
     TextView mainTitle;
     TextView secondTitle;
@@ -30,6 +31,7 @@ public class EndingFragment extends Fragment {
         secondTitle.setText("Submit your answers and get your results!");
 
         nextButton = (Button) view.findViewById(R.id.start);
+
         nextButton.setText("Submit");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +40,21 @@ public class EndingFragment extends Fragment {
             }
         });
 
+        ((MainActivity)getActivity()).setFinalPageReached(nextButton);
+
 
         return view;
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            //Restore the fragment's state here
+            boolean enable = ((MainActivity)getActivity()).shouldEnableSubmit();
+            nextButton.setEnabled(enable);
+
+        }
+    }
+
 }

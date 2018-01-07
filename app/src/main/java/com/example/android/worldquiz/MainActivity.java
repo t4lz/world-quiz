@@ -4,26 +4,34 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = "MainActivity";
     public static final String NUM_OF_FRAGMENTS = "numOfFragments";
     private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
     Queue<Fragment> questionFragments = new ArrayDeque<>();
     String[] questions;
-    String[] answers;
     SectionsStatePagerAdapter adapter;
+    boolean[] answered;
+    boolean[] answeredCorrect;
+    boolean finalPageReached = false;
+    Button submitButton;
+    boolean enableSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         questions = getResources().getStringArray(R.array.questions);
-        answers = getResources().getStringArray(R.array.answers);
+        answered = new boolean[questions.length];
+        answeredCorrect = new boolean[questions.length];
         mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
@@ -45,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager (ViewPager viewPager){
         adapter.addFragment(new WelcomeFragment());
-        questionFragments.add(QuestionFragment.newInstance(questions[0], 1, 0));
-        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[1], 2, R.array.options1));
-        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[2], 3, R.array.options2));
-        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[3], 4, R.array.options3));
-        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[4], 5, R.array.options4));
-        questionFragments.add(QuestionFragment.newInstance(questions[5], 6, 0));
+        questionFragments.add(QuestionFragment.newInstance(questions[0], 1, 0, R.string.answer0));
+        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[1], 2, R.array.options1, R.array.answer1));
+        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[2], 3, R.array.options2, R.string.answer2));
+        questionFragments.add(MultipleChoiseQuestionFragment.newInstance(questions[3], 4, R.array.options3, R.string.answer3));
+        questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[4], 5, R.array.options4, R.array.answer4));
+        questionFragments.add(QuestionFragment.newInstance(questions[5], 6, 0, R.string.answer5));
         questionFragments.add(new EndingFragment());
         viewPager.setAdapter(adapter);
     }
@@ -72,4 +80,34 @@ public class MainActivity extends AppCompatActivity {
     public int getPagesNumber() {
         return mViewPager.getAdapter().getCount();
     }
+
+    public void setAnswerState(int answerNum, boolean state) {
+        answered[answerNum - 1] = state;
+        if (finalPageReached) {
+            boolean newState = isAllTrue(answered);
+            Log.d(TAG, String.format("updating submitButton state. is enabled: %b", newState));
+            submitButton.setEnabled(newState);
+            enableSubmit = newState;
+        }
+    }
+
+    public boolean shouldEnableSubmit(){
+        return enableSubmit;
+    }
+
+    public void setCorrectAnswerState(int answerNum, boolean state) {
+        answeredCorrect[answerNum - 1] = state;
+    }
+
+    public void setFinalPageReached(Button button) {
+        finalPageReached = true;
+        submitButton = button;
+    }
+
+    private static boolean isAllTrue(boolean[] array)
+    {
+        for(boolean b : array) if(!b) return false;
+        return true;
+    }
+
 }

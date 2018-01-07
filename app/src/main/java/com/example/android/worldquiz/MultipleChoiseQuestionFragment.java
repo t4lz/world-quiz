@@ -18,22 +18,24 @@ import android.widget.RelativeLayout;
 public class MultipleChoiseQuestionFragment extends QuestionFragment {
     private static final String TAG = "MultipleAnswerQuestionFragment";
 
-    private static final String CONTENT = "page_message";
-    private static final String PAGENUM = "page_number";
-    private static final String ANSWERSID = "possible_answers_id";
+    private static final String CONTENT = "pageMessage";
+    private static final String PAGENUM = "pageNumber";
+    private static final String ANSWERSID = "possibleAnswersId";
     public static final String CHECKED_BUTTON = "checkedButton";
+    public static final String CORRECT_ANSWER_ID = "correctAnswerId";
 
     RadioButton[] answerRadioButtons;
     int checkedButton;
     RadioGroup answerListRadioGroup;
 
-    public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
+    public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId, int correctAnswerId)
     {
         MultipleChoiseQuestionFragment f = new MultipleChoiseQuestionFragment();
         Bundle bdl = new Bundle(3);
         bdl.putString(CONTENT, question_content_text);
         bdl.putInt(PAGENUM, pageNum);
         bdl.putInt(ANSWERSID, possibleAnswersId);
+        bdl.putInt(CORRECT_ANSWER_ID, correctAnswerId);
         f.setArguments(bdl);
         return f;
     }
@@ -67,6 +69,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
 
     @Override
     public void populateAnswerArea() {
+        correctAnswer = getString(correctAnswerResourceId);
         LayoutInflater inflater = LayoutInflater.from(getContext());
         answerListRadioGroup = (RadioGroup) inflater.inflate(R.layout.multiple_choice_layout, null, false);
         String[] answers = getResources().getStringArray(answerArrayResourceId);
@@ -90,14 +93,9 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
                 setRightButtonState(true);
-                switch (checkedId) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    default:
-                        break;
-                }
+                ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber,
+                        (answerRadioButtons[answerListRadioGroup.getCheckedRadioButtonId()].
+                        getText().toString() == correctAnswer));
             }
         });
     }

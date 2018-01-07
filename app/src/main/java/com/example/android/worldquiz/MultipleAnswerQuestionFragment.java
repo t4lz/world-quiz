@@ -17,21 +17,25 @@ import android.widget.RelativeLayout;
 public class MultipleAnswerQuestionFragment extends QuestionFragment {
     private static final String TAG = "MultipleAnswerQuestionFragment";
 
-    private static final String CONTENT = "page_message";
-    private static final String PAGENUM = "page_number";
-    private static final String ANSWERSID = "possible_answers_id";
+    private static final String CONTENT = "pageMessage";
+    private static final String PAGENUM = "pageNumber";
+    private static final String ANSWERSID = "possibleAnswersId";
     public static final String CHECKED_STATE = "checkedState";
+    public static final String CORRECT_ANSWER_ID = "correctAnswerId";
 
     CheckBox[] answerCheckBoxes;
     boolean[] checkedState;
+    String[] correctAnswers;
+    String joinedAnswers;
 
-    public static MultipleAnswerQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
+    public static MultipleAnswerQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId, int correctAnswerId)
     {
         MultipleAnswerQuestionFragment f = new MultipleAnswerQuestionFragment();
         Bundle bdl = new Bundle(3);
         bdl.putString(CONTENT, question_content_text);
         bdl.putInt(PAGENUM, pageNum);
         bdl.putInt(ANSWERSID, possibleAnswersId);
+        bdl.putInt(CORRECT_ANSWER_ID, correctAnswerId);
         f.setArguments(bdl);
         return f;
     }
@@ -62,6 +66,13 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
 
     @Override
     public void populateAnswerArea() {
+        correctAnswers = getResources().getStringArray(correctAnswerResourceId);
+        StringBuilder builder = new StringBuilder();
+        for(String s : correctAnswers) {
+            builder.append(s);
+        }
+        joinedAnswers = builder.toString();
+
         LayoutInflater inflater = LayoutInflater.from(getContext());
         LinearLayout answersListLinearLayout = (LinearLayout) inflater.inflate(R.layout.multiple_answer_layout, null, false);
         String[] answers = getResources().getStringArray(answerArrayResourceId);
@@ -85,6 +96,7 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
                     else {
                         setRightButtonState(shouldEnableButton());
                     }
+                    ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber, checkAnswer());
                 }
             });
             answersListLinearLayout.addView(answerCheckBoxes[i]);
@@ -99,5 +111,15 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
             should = answerCheckBoxes[i].isChecked();
         }
         return should;
+    }
+
+    public boolean checkAnswer(){
+        StringBuilder builder = new StringBuilder();
+        for (int i=0; i < answerCheckBoxes.length; i++){
+            if(answerCheckBoxes[i].isChecked()) {
+                builder.append(answerCheckBoxes[i].getText().toString());
+            }
+        }
+        return (builder.toString() == joinedAnswers);
     }
 }

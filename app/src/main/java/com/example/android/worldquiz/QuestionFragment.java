@@ -27,14 +27,17 @@ import org.w3c.dom.Text;
 public class QuestionFragment extends Fragment {
     private static final String TAG = "QuestionFragment";
 
-    private static final String CONTENT = "page_message";
-    private static final String PAGENUM = "page_number";
-    private static final String ANSWERSID = "possible_answers_id";
+    private static final String CONTENT = "pageMessage";
+    private static final String PAGENUM = "pageNumber";
+    private static final String ANSWERSID = "possibleAnswersId";
     public static final String USER_ANSWER = "userAnswer";
+    public static final String CORRECT_ANSWER_ID= "correctAnswerId";
 
     String content;
     int pageNumber;
     int answerArrayResourceId;
+    int correctAnswerResourceId;
+    String correctAnswer;
 
     Button nextButton;
     TextView questionTitle;
@@ -42,13 +45,14 @@ public class QuestionFragment extends Fragment {
     EditText userAnswer;
     RelativeLayout answerArea;
 
-    public static QuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId)
+    public static QuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId, int correctAnswerId)
     {
         QuestionFragment f = new QuestionFragment();
         Bundle bdl = new Bundle(3);
         bdl.putString(CONTENT, question_content_text);
         bdl.putInt(PAGENUM, pageNum);
         bdl.putInt(ANSWERSID, possibleAnswersId);
+        bdl.putInt(CORRECT_ANSWER_ID, correctAnswerId);
         f.setArguments(bdl);
         return f;
     }
@@ -61,6 +65,7 @@ public class QuestionFragment extends Fragment {
         content = arguments.getString(CONTENT);
         pageNumber = arguments.getInt(PAGENUM);
         answerArrayResourceId = arguments.getInt(ANSWERSID);
+        correctAnswerResourceId = arguments.getInt(CORRECT_ANSWER_ID);
 
         View view = inflater.inflate(R.layout.question_layout, container, false);
         questionTitle= (TextView) view.findViewById(R.id.question_title);
@@ -111,6 +116,7 @@ public class QuestionFragment extends Fragment {
 
 
     public void populateAnswerArea() {
+        correctAnswer = getString(correctAnswerResourceId);
         userAnswer = new EditText(((MainActivity)getActivity()));
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -134,6 +140,8 @@ public class QuestionFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 setRightButtonState(shouldEnableButton());
+                ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber,
+                        (userAnswer.getText().toString() == correctAnswer));
             }
         });
         answerArea.addView(userAnswer);
@@ -148,6 +156,8 @@ public class QuestionFragment extends Fragment {
      * Enable the button if an answer was given, else disable it.
      */
     public void setRightButtonState(boolean shouldEnable){
+        Log.d(TAG, String.format("Updating button state. is the question answered: %b", shouldEnable));
         nextButton.setEnabled(shouldEnable);
+        ((MainActivity)getActivity()).setAnswerState(pageNumber, shouldEnable);
     }
 }
