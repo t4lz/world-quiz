@@ -1,5 +1,6 @@
 package com.example.android.worldquiz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by tal on 12/7/17.
@@ -37,6 +39,11 @@ public class EndingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.v(TAG, "Button clicked!");
+                Context context = getContext();
+                CharSequence text = "Hello toast!";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
         });
 
