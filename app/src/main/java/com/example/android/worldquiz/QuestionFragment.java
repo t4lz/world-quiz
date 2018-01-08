@@ -140,8 +140,10 @@ public class QuestionFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 setRightButtonState(shouldEnableButton());
+                Log.d(TAG, String.format("Checking answer correctness for question %d. Entered answer: %s, correct Answer: %s",
+                        pageNumber, userAnswer.getText().toString(), correctAnswer));
                 ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber,
-                        (userAnswer.getText().toString() == correctAnswer));
+                        (userAnswer.getText().toString().equals(correctAnswer)));
             }
         });
         answerArea.addView(userAnswer);

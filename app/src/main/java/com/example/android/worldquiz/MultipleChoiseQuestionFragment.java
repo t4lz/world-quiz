@@ -2,6 +2,7 @@ package com.example.android.worldquiz;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -93,9 +94,12 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
                 setRightButtonState(true);
+                Log.d(TAG, String.format("Checking answer correctness for question %d. Entered answer: %s, correct Answer: %s",
+                        pageNumber, answerRadioButtons[answerListRadioGroup.getCheckedRadioButtonId()].
+                                getText().toString(), correctAnswer));
                 ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber,
                         (answerRadioButtons[answerListRadioGroup.getCheckedRadioButtonId()].
-                        getText().toString() == correctAnswer));
+                        getText().toString().equals(correctAnswer)));
             }
         });
     }

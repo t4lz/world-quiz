@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setCorrectAnswerState(int answerNum, boolean state) {
         answeredCorrect[answerNum - 1] = state;
+        Log.d(TAG, String.format("Correct Answers Count: updated question number %d to %b", answerNum, state));
     }
 
     public void setFinalPageReached(Button button) {
@@ -110,4 +111,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean[] getAnsweredCorrect(){
+        return answeredCorrect;
+    }
 }

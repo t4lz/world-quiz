@@ -39,10 +39,20 @@ public class EndingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.v(TAG, "Button clicked!");
+
+                boolean[] scoreArray = ((MainActivity)getActivity()).getAnsweredCorrect();
+                int correct = 0;
+                int total = 0;
+                for (int i=0; i<scoreArray.length; i++) {
+                    total++;
+                    if (scoreArray[i]) {
+                        correct++;
+                    }
+                }
                 Context context = getContext();
-                CharSequence text = "Hello toast!";
+                String toastMessage = String.format("You've answered %d questions correctly, out of a total of %d questions.", correct, total);
                 int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
+                Toast toast = Toast.makeText(context, toastMessage, duration);
                 toast.show();
             }
         });

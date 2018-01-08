@@ -120,6 +120,6 @@ public class MultipleAnswerQuestionFragment extends QuestionFragment {
                 builder.append(answerCheckBoxes[i].getText().toString());
             }
         }
-        return (builder.toString() == joinedAnswers);
+        return (builder.toString().equals(joinedAnswers));
     }
 }
