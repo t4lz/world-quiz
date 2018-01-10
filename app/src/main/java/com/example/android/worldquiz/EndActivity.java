@@ -1,6 +1,7 @@
 package com.example.android.worldquiz;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,20 +30,27 @@ public class EndActivity extends AppCompatActivity {
         boolean[] correctnessArray = scoreInfo.getBooleanArray(EndingFragment.CORRECTNESS_ARRAY);
 
         int greetingId;
+        int greetingColorId;
         float percent = (float)correct / total;
         percent = percent * 100;
         if (percent == 100) {
             greetingId = R.string.perfect_score_message;
+            greetingColorId = R.color.color_perfect_score;
         } else if (percent > 80) {
             greetingId = R.string.good_score_message;
+            greetingColorId = R.color.color_very_good_score;
         } else if (percent > 60) {
             greetingId = R.string.not_that_good_score_message;
-        } else if (percent == 0) {
-            greetingId = R.string.nothing_correct_message;
-        } else {
+            greetingColorId = R.color.color_ok_score;
+        } else if (percent > 0) {
             greetingId = R.string.bad_score_message;
+            greetingColorId = R.color.color_bad_score;
+        } else {
+            greetingId = R.string.nothing_correct_message;
+            greetingColorId = R.color.color_nothing_correct;
         }
         greeting.setText(greetingId);
+        greeting.setTextColor(getResources().getColor(greetingColorId));
         scoreSentence.setText(String.format(getString(R.string.score_sentence), correct, total));
 
         resetAppButton =  (Button) findViewById(R.id.reset_app_button);
@@ -55,7 +63,6 @@ public class EndActivity extends AppCompatActivity {
                 startActivity(i);
             }
         }
-
         );
     }
 }

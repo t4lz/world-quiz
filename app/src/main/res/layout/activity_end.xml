@@ -17,6 +17,7 @@
         android:gravity="center"
         android:textSize="32sp"
         android:layout_weight="1"
+        android:fontFamily="serif"
         />
 
     <TextView
@@ -27,6 +28,7 @@
         android:textSize="24sp"
         android:gravity="center"
         android:layout_weight="5"
+        android:fontFamily="serif"
         />
 
     <Button
@@ -36,6 +38,7 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:text="@string/reset_button"
+        android:fontFamily="serif"
         />
 
 </LinearLayout>

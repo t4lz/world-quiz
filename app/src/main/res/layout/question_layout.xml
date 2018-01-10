@@ -72,6 +72,7 @@
                 android:enabled="false"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="serif"
                 />
 
         </RelativeLayout>

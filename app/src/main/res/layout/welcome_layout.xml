@@ -43,6 +43,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Start Now!"
+            android:fontFamily="serif"
             />
 
     </RelativeLayout>

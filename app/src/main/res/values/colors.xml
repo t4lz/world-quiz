@@ -8,4 +8,9 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+    <color name="color_perfect_score">#64DD17</color>
+        <color name="color_very_good_score">#AEEA00</color>
+    <color name="color_ok_score">#FFD600</color>
+    <color name="color_bad_score">#FFAB00</color>
+    <color name="color_nothing_correct">#DD2C00</color>
 </resources>
