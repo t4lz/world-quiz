@@ -1,8 +1,16 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">World Quiz</string>
-    <string name="question_title">Question <xliff:g id="question_number" example="1">%d</xliff:g></string>
+    <string name="question_title">Question <xliff:g example="1" id="question_number">%d</xliff:g></string>
     <string name="answer_hint">Type your answer here</string>
-
+    <string name="reset_button">Start Over</string>
+    <string name="perfect_score_message">Perfect!</string>
+    <string name="good_score_message">Nice!</string>
+    <string name="not_that_good_score_message">Not bad!</string>
+    <string name="bad_score_message">Oh...</string>
+    <string name="nothing_correct_message">Did you even try?</string>
+    <string name="score_sentence">You answered correctly <xliff:g
+        id="number_of_correct_answers" example="4">%d</xliff:g> questions out of  <xliff:g
+        id="total_number_of_questions" example="6">%d</xliff:g></string>
 
 
     <string-array name="questions">

@@ -1,6 +1,7 @@
 package com.example.android.worldquiz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,10 @@ import android.widget.Toast;
 public class EndingFragment extends Fragment {
     private static final String TAG = "WelcomeFragment";
     public static final String BUTTON_STATE = "ButtonState";
+    public static final String TOTAL_QUESTIONS = "totalQuestions";
+    public static final String CORRECT_QUESTIONS = "correctQuestions";
+    public static final String CORRECTNESS_ARRAY = "correctnessArray";
+    public static final String EXTRA_BUNDLE = "extraBundle";
     Button nextButton;
     TextView mainTitle;
     TextView secondTitle;
@@ -54,6 +60,13 @@ public class EndingFragment extends Fragment {
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, toastMessage, duration);
                 toast.show();
+                Intent intent = new Intent(((MainActivity)getActivity()), EndActivity.class);
+                Bundle extra = new Bundle();
+                extra.putInt(TOTAL_QUESTIONS, total);
+                extra.putInt(CORRECT_QUESTIONS, correct);
+                extra.putBooleanArray(CORRECTNESS_ARRAY, scoreArray);
+                intent.putExtra(EXTRA_BUNDLE, extra);
+                startActivity(intent);
             }
         });
 
