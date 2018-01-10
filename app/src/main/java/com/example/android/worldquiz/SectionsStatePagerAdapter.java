@@ -19,7 +19,7 @@ public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    public void addFragment(Fragment fragment){
+    public void addFragment(Fragment fragment) {
         mFragmentList.add(fragment);
         notifyDataSetChanged();
     }

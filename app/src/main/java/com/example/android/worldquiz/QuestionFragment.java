@@ -1,6 +1,5 @@
 package com.example.android.worldquiz;
 
-import android.app.ActionBar;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by tal on 12/7/17.

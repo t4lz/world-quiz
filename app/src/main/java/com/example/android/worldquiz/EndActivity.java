@@ -1,14 +1,11 @@
 package com.example.android.worldquiz;
 
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class EndActivity extends AppCompatActivity {
 
@@ -22,16 +19,14 @@ public class EndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end);
         greeting = (TextView) findViewById(R.id.greeting);
         scoreSentence = (TextView) findViewById(R.id.score_sentence);
-
         Intent intent = getIntent();
         Bundle scoreInfo = intent.getBundleExtra(EndingFragment.EXTRA_BUNDLE);
         int correct = scoreInfo.getInt(EndingFragment.CORRECT_QUESTIONS);
         int total = scoreInfo.getInt(EndingFragment.TOTAL_QUESTIONS);
         boolean[] correctnessArray = scoreInfo.getBooleanArray(EndingFragment.CORRECTNESS_ARRAY);
-
         int greetingId;
         int greetingColorId;
-        float percent = (float)correct / total;
+        float percent = (float) correct / total;
         percent = percent * 100;
         if (percent == 100) {
             greetingId = R.string.perfect_score_message;
@@ -52,17 +47,16 @@ public class EndActivity extends AppCompatActivity {
         greeting.setText(greetingId);
         greeting.setTextColor(getResources().getColor(greetingColorId));
         scoreSentence.setText(String.format(getString(R.string.score_sentence), correct, total));
-
-        resetAppButton =  (Button) findViewById(R.id.reset_app_button);
+        resetAppButton = (Button) findViewById(R.id.reset_app_button);
         resetAppButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = getBaseContext().getPackageManager()
-                        .getLaunchIntentForPackage( getBaseContext().getPackageName() );
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-            }
-        }
+                                              @Override
+                                              public void onClick(View v) {
+                                                  Intent i = getBaseContext().getPackageManager()
+                                                          .getLaunchIntentForPackage(getBaseContext().getPackageName());
+                                                  i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                  startActivity(i);
+                                              }
+                                          }
         );
     }
 }

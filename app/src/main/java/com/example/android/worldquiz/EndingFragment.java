@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 public class EndingFragment extends Fragment {
     private static final String TAG = "WelcomeFragment";
-    public static final String BUTTON_STATE = "ButtonState";
     public static final String TOTAL_QUESTIONS = "totalQuestions";
     public static final String CORRECT_QUESTIONS = "correctQuestions";
     public static final String CORRECTNESS_ARRAY = "correctnessArray";
@@ -31,36 +29,33 @@ public class EndingFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView (LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.welcome_layout, container, false);
         mainTitle = (TextView) view.findViewById(R.id.main_title);
         secondTitle = (TextView) view.findViewById(R.id.second_title);
-        mainTitle.setText("You've answered all the questions!");
-        secondTitle.setText("Submit your answers and get your results!");
-
+        mainTitle.setText(R.string.end_message);
+        secondTitle.setText(R.string.submit_message);
         nextButton = (Button) view.findViewById(R.id.start);
-
-        nextButton.setText("Submit");
+        nextButton.setText(R.string.submit_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.v(TAG, "Button clicked!");
-
-                boolean[] scoreArray = ((MainActivity)getActivity()).getAnsweredCorrect();
+                boolean[] scoreArray = ((MainActivity) getActivity()).getAnsweredCorrect();
                 int correct = 0;
                 int total = 0;
-                for (int i=0; i<scoreArray.length; i++) {
+                for (int i = 0; i < scoreArray.length; i++) {
                     total++;
                     if (scoreArray[i]) {
                         correct++;
                     }
                 }
                 Context context = getContext();
-                String toastMessage = String.format("You've answered %d questions correctly, out of a total of %d questions.", correct, total);
+                String toastMessage = String.format(getString(R.string.toast_text), correct, total);
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, toastMessage, duration);
                 toast.show();
-                Intent intent = new Intent(((MainActivity)getActivity()), EndActivity.class);
+                Intent intent = new Intent(((MainActivity) getActivity()), EndActivity.class);
                 Bundle extra = new Bundle();
                 extra.putInt(TOTAL_QUESTIONS, total);
                 extra.putInt(CORRECT_QUESTIONS, correct);
@@ -69,10 +64,7 @@ public class EndingFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        ((MainActivity)getActivity()).setFinalPageReached(nextButton);
-
-
+        ((MainActivity) getActivity()).setFinalPageReached(nextButton);
         return view;
     }
 
@@ -81,7 +73,7 @@ public class EndingFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             //Restore the fragment's state here
-            boolean enable = ((MainActivity)getActivity()).shouldEnableSubmit();
+            boolean enable = ((MainActivity) getActivity()).shouldEnableSubmit();
             nextButton.setEnabled(enable);
 
         }

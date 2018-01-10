@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     public static final String NUM_OF_FRAGMENTS = "numOfFragments";
-    private SectionsStatePagerAdapter mSectionsStatePagerAdapter;
     private ViewPager mViewPager;
     Queue<Fragment> questionFragments = new ArrayDeque<>();
     String[] questions;
@@ -32,13 +31,12 @@ public class MainActivity extends AppCompatActivity {
         questions = getResources().getStringArray(R.array.questions);
         answered = new boolean[questions.length];
         answeredCorrect = new boolean[questions.length];
-        mSectionsStatePagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         setupViewPager(mViewPager);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             int numOfFragments = savedInstanceState.getInt(NUM_OF_FRAGMENTS);
-            for (int i=1; i<numOfFragments; i++){
+            for (int i = 1; i < numOfFragments; i++) {
                 addNextPage();
             }
         }
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(NUM_OF_FRAGMENTS, adapter.getCount());
     }
 
-    private void setupViewPager (ViewPager viewPager){
+    private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(new WelcomeFragment());
         questionFragments.add(QuestionFragment.newInstance(questions[0], 1, 0, R.string.answer0));
         questionFragments.add(MultipleAnswerQuestionFragment.newInstance(questions[1], 2, R.array.options1, R.array.answer1));
@@ -68,12 +66,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void setViewPager(int fragmentNumber){
+    public void setViewPager(int fragmentNumber) {
         mViewPager.setCurrentItem(fragmentNumber);
     }
 
-    public int getViewPager(){
+    public int getViewPager() {
         return mViewPager.getCurrentItem();
     }
 
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public boolean shouldEnableSubmit(){
+    public boolean shouldEnableSubmit() {
         return enableSubmit;
     }
 
@@ -105,13 +102,12 @@ public class MainActivity extends AppCompatActivity {
         submitButton = button;
     }
 
-    private static boolean isAllTrue(boolean[] array)
-    {
-        for(boolean b : array) if(!b) return false;
+    private static boolean isAllTrue(boolean[] array) {
+        for (boolean b : array) if (!b) return false;
         return true;
     }
 
-    public boolean[] getAnsweredCorrect(){
+    public boolean[] getAnsweredCorrect() {
         return answeredCorrect;
     }
 }

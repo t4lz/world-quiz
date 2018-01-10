@@ -6,6 +6,12 @@
     <string name="next_button">Next</string>
     <string name="question_title">Question <xliff:g example="1" id="question_number">%d</xliff:g></string>
     <string name="answer_hint">Type your answer here</string>
+    <string name="end_message">You\'ve reached the end of the quiz!</string>
+    <string name="submit_message">Submit your answers and get your results</string>
+    <string name="submit_button">Submit</string>
+    <string name="toast_text">You\'ve answered <xliff:g id="toast_number_of_correct_answers"
+        example="4">%d</xliff:g> questions correctly, out of a total of <xliff:g
+        id="toast_total_number_of_questions" example="6">%d</xliff:g> questions</string>
     <string name="reset_button">Start Over</string>
     <string name="perfect_score_message">Perfect!</string>
     <string name="good_score_message">Nice!</string>

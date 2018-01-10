@@ -29,8 +29,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
     int checkedButton;
     RadioGroup answerListRadioGroup;
 
-    public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId, int correctAnswerId)
-    {
+    public static MultipleChoiseQuestionFragment newInstance(String question_content_text, int pageNum, int possibleAnswersId, int correctAnswerId) {
         MultipleChoiseQuestionFragment f = new MultipleChoiseQuestionFragment();
         Bundle bdl = new Bundle(3);
         bdl.putString(CONTENT, question_content_text);
@@ -47,7 +46,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
         if (savedInstanceState != null) {
             //Restore the fragment's state here
             checkedButton = savedInstanceState.getInt(CHECKED_BUTTON);
-            if (checkedButton != -1){
+            if (checkedButton != -1) {
                 answerListRadioGroup.check(checkedButton);
             }
         }
@@ -59,7 +58,7 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
         super.onSaveInstanceState(outState);
         //Save the fragment's state here
         checkedButton = -1;
-        for (int i=0; i < answerRadioButtons.length; i++) {
+        for (int i = 0; i < answerRadioButtons.length; i++) {
             if (answerRadioButtons[i].isChecked()) {
                 checkedButton = i;
             }
@@ -76,8 +75,8 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
         String[] answers = getResources().getStringArray(answerArrayResourceId);
 
         answerRadioButtons = new RadioButton[answers.length];
-        for (int i=0; i < answers.length; i++) {
-            answerRadioButtons[i] = new RadioButton(((MainActivity)getActivity()));
+        for (int i = 0; i < answers.length; i++) {
+            answerRadioButtons[i] = new RadioButton(((MainActivity) getActivity()));
             answerRadioButtons[i].setId(i);
             answerRadioButtons[i].setText(answers[i]);
             answerRadioButtons[i].setTypeface(Typeface.create("serif", Typeface.NORMAL));
@@ -88,18 +87,16 @@ public class MultipleChoiseQuestionFragment extends QuestionFragment {
             answerListRadioGroup.addView(answerRadioButtons[i]);
         }
         answerArea.addView(answerListRadioGroup);
-        answerListRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
+        answerListRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
                 setRightButtonState(true);
                 Log.d(TAG, String.format("Checking answer correctness for question %d. Entered answer: %s, correct Answer: %s",
                         pageNumber, answerRadioButtons[answerListRadioGroup.getCheckedRadioButtonId()].
                                 getText().toString(), correctAnswer));
-                ((MainActivity)getActivity()).setCorrectAnswerState(pageNumber,
+                ((MainActivity) getActivity()).setCorrectAnswerState(pageNumber,
                         (answerRadioButtons[answerListRadioGroup.getCheckedRadioButtonId()].
-                        getText().toString().equals(correctAnswer)));
+                                getText().toString().equals(correctAnswer)));
             }
         });
     }
