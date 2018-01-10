@@ -6,16 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/standard_padding"
     tools:context="com.example.android.worldquiz.EndActivity">
 
     <TextView
         android:id="@+id/greeting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Not Bad!"
         android:gravity="center"
-        android:textSize="32sp"
+        android:textSize="@dimen/huge_text"
         android:layout_weight="1"
         android:fontFamily="serif"
         />
@@ -24,8 +23,7 @@
         android:id="@+id/score_sentence"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You answered correctly 10 questions out of 15"
-        android:textSize="24sp"
+        android:textSize="@dimen/big_font"
         android:gravity="center"
         android:layout_weight="5"
         android:fontFamily="serif"
@@ -36,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/standard_padding"
         android:text="@string/reset_button"
         android:fontFamily="serif"
         />

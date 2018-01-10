@@ -3,4 +3,9 @@
     <dimen name="space_between_answers_vertical">8dp</dimen>
     <dimen name="space_between_answers_horizontal">16dp</dimen>
     <dimen name="space_between_button_and_answer">0dp</dimen>
+    <dimen name="big_font">24sp</dimen>
+    <dimen name="title_padding">32dp</dimen>
+    <dimen name="small_font_size">16sp</dimen>
+    <dimen name="standard_padding">16dp</dimen>
+    <dimen name="huge_text">32sp</dimen>
 </resources>

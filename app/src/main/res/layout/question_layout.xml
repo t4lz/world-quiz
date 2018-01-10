@@ -10,10 +10,9 @@
         android:id="@+id/question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Question 1/9"
-        android:textSize="16sp"
+        android:textSize="@dimen/small_font_size"
         android:gravity="left"
-        android:paddingLeft="16dp"
+        android:paddingLeft="@dimen/standard_padding"
         android:fontFamily="serif"
         android:textColor="@android:color/white"
         android:background="@color/colorAccent"
@@ -25,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="@dimen/standard_padding"
         >
 
 
@@ -33,9 +32,8 @@
             android:id="@+id/question_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:text="How much wood, would a woodchuck chuck?"
-            android:paddingBottom="16dp"
+            android:textSize="@dimen/big_font"
+            android:paddingBottom="@dimen/standard_padding"
             android:gravity="center"
             android:fontFamily="serif"
             />
@@ -45,17 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-            <!--<EditText
-                android:id="@+id/answer_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Type your answer here!"
-                android:layout_centerVertical="true"
-                android:fontFamily="serif"
-                android:imeOptions="actionDone"
-                android:inputType="textCapWords"
-                /> -->
 
         </RelativeLayout>
 
@@ -68,7 +55,7 @@
                 android:id="@+id/next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next"
+                android:text="@string/next_button"
                 android:enabled="false"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"

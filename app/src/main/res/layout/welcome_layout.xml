@@ -11,10 +11,10 @@
         android:id="@+id/main_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcom to the World Quiz!"
-        android:textSize="24sp"
+        android:text="@string/welcome_message"
+        android:textSize="@dimen/big_font"
         android:gravity="center_horizontal"
-        android:padding="32dp"
+        android:padding="@dimen/title_padding"
         android:fontFamily="serif"
         />
 
@@ -22,10 +22,10 @@
         android:id="@+id/second_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ready to get started?"
-        android:textSize="24sp"
+        android:text="@string/welcome_page_second_title"
+        android:textSize="@dimen/big_font"
         android:gravity="center_horizontal"
-        android:padding="32dp"
+        android:padding="@dimen/title_padding"
         android:fontFamily="serif"
         />
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Start Now!"
+            android:text="@string/start_button"
             android:fontFamily="serif"
             />
 
