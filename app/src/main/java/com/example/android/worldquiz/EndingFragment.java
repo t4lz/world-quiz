@@ -50,11 +50,6 @@ public class EndingFragment extends Fragment {
                         correct++;
                     }
                 }
-                Context context = getContext();
-                String toastMessage = String.format(getString(R.string.toast_text), correct, total);
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, toastMessage, duration);
-                toast.show();
                 Intent intent = new Intent(((MainActivity) getActivity()), EndActivity.class);
                 Bundle extra = new Bundle();
                 extra.putInt(TOTAL_QUESTIONS, total);
