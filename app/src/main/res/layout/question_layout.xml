@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/big_font"
-            android:paddingBottom="@dimen/standard_padding"
+            android:padding="@dimen/standard_padding"
             android:gravity="center"
             android:fontFamily="serif"
             />
